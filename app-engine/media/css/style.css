@@ -1,16 +1,23 @@
 h1{
+	margin: 0;
+	font-size: 30px;
 }
 
 h2{
 	margin: 0;
-	padding-left: 30px;
+	padding-top: 10px;
+	padding-left: 10px;
+	font-size: 18px;	
 }
 
 #title{
 	position: absolute;
 	margin: 0;
 	top: 2%;
-	left:3%;
+	left:2.5%;
+	font-face: times;
+	font-style: italic;
+	color: #bbb;
 }
 
 #main{
@@ -43,11 +50,8 @@ h2{
 
 #next{
 	position: absolute;
-	border: dotted 1px gray;
-	width: 100px;
-	height: 70px;
-	bottom: 35px;
-	right: 50px;
+	bottom: 25px;
+	right: 25px;
 }
 
 #video{
@@ -56,4 +60,8 @@ h2{
 	position:absolute;
 	top: 0;
 	left: 0;
+}
+
+img#music {
+	  padding-right:4px;
 }

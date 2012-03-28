@@ -2,6 +2,7 @@
 
 <head>
 <link rel="stylesheet" href="/sitemedia/css/style.css" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 <script type="text/javascript" src="/sitemedia/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="/sitemedia/js/misc_scripts.js"></script>
 </head>
@@ -11,28 +12,34 @@
 	<div id="main">
 	
 	        <div id="video">
-<!--			<iframe width="600" height="400" src="http://www.youtube-nocookie.com/embed/{{video_link}}?rel=0&autoplay=1&fs=1&controls=0&showinfo=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe> -->
-                <iframe width="600" height="400" src="http://www.youtube-nocookie.com/embed/a1Y73sPHKxw?rel=0&autoplay=1&controls=0&showinfo=0&enablejsapi=1&wmode=transparent" frameborder="0"></iframe>
+<!-- Trending			<iframe width="600" height="400" src="http://www.youtube-nocookie.com/embed/{{video_link}}?rel=0&autoplay=1&fs=1&controls=0&showinfo=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe> -->
+
+<object type="application/x-shockwave-flash" id="ytplayer" wmode="transparent" data="http://www.youtube.com/apiplayer?enablejsapi=1&rel=0&autoplay=1" width="600" height="400">
+  <param name="allowScriptAccess" value="always">
+</object>
+
+<!-- Chipmunk                <iframe width="600" height="400" src="http://www.youtube-nocookie.com/embed/a1Y73sPHKxw?rel=0&autoplay=1&controls=0&showinfo=0&enablejsapi=1&wmode=transparent" frameborder="0"></iframe> -->
 		</div>
 
 		<div id="title">
-			<h1>Title</h1>
-			<h2>Subtitle</h2>
+			<h1>TrendCouch</h1>
+			<h2><img id="music" src="/sitemedia/images/music.png"/> LMFAO - I'm sexy and I know it</h2>
 		</div>
 	
 		<div id="menu">
-			<img id="gear" src="/sitemedia/images/gear.png"/>
+			<img id="gear" src="/sitemedia/images/gear_light.png"/>
 		</div>
 	
 		<div id="volume">
-			<img id="volume" src="/sitemedia/images/volume.png"/>
+			<img id="volume" src="/sitemedia/images/volume_light.png"/>
 		</div>
 	
 		<div id="controls">
-			<img id="pause" src="/sitemedia/images/pause.png"/>
+			<img id="pause" src="/sitemedia/images/pause_light.png"/>
 		</div>
 		
 		<div id="next">
+			<img id="next" src="/sitemedia/images/next_light.png"/>		  
 		</div>
 
 	</div>

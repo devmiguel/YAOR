@@ -1,0 +1,19 @@
+{
+  "name": "TrendCouch",
+  "description": "Watch and listen to the greatest music video trends",
+  "version": "1.1",
+  "app": {
+    "urls": [
+      "http://www.trendcouch.appspot.com/"
+    ],
+    "launch": {
+      "web_url": "http://www.trendcouch.appspot.com"
+    }
+  },
+  "icons": {
+    "128": "128-128-chrome.png"
+  },
+  "permissions": [
+    "unlimitedStorage"
+  ]
+}

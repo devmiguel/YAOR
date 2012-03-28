@@ -1,0 +1,31 @@
+application: trendcouch
+version: 1-1-dev
+runtime: python
+api_version: 1
+
+handlers:
+- url: /sitemedia/css
+  static_dir: media/css
+
+- url: /sitemedia/js
+  static_dir: media/js
+
+- url: /sitemedia/images
+  static_dir: media/images
+  
+- url: /sitemedia/fonts
+  static_dir: media/fonts
+
+- url: /sitemedia/songs
+  static_dir: media/songs
+  
+- url: /sitemedia/files
+  static_dir: media/files
+
+- url: /
+  script: trendcouch.py
+  
+
+builtins:
+- datastore_admin: on
+- remote_api: on

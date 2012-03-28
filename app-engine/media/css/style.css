@@ -1,0 +1,60 @@
+h1{
+}
+
+h2{
+	margin: 0;
+	padding-left: 30px;
+}
+
+#title{
+	position: absolute;
+	margin: 0;
+	top: 2%;
+	left:3%;
+}
+
+#main{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+#gear{
+	position: absolute;
+	right: 15px; 
+	top: 15px;
+}
+
+#controls{
+	position: absolute;
+	left: 50%; 
+	width: 50px; 
+	margin-left: -25px;
+	bottom: 50px;
+}
+
+#volume{
+	position: absolute;
+	left: 25px;
+	bottom: 25px;
+}
+
+#next{
+	position: absolute;
+	border: dotted 1px gray;
+	width: 100px;
+	height: 70px;
+	bottom: 35px;
+	right: 50px;
+}
+
+#video{
+	width:600px;
+	height:400px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:-200px 0 0 -300px;
+}

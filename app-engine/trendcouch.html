@@ -5,6 +5,7 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 <script type="text/javascript" src="/sitemedia/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="/sitemedia/js/misc_scripts.js"></script>
+<script type="text/javascript" src="/sitemedia/js/music.js"></script>
 </head>
 
 <body>
@@ -18,12 +19,15 @@
   <param name="allowScriptAccess" value="always">
 </object>
 
+<input id="video-id" type="hidden" name="video-id-input" value="{{video_link}}">
+<input id="video-list" type="hidden" name="video-list-input" value="{{video_list}}">
+
 <!-- Chipmunk                <iframe width="600" height="400" src="http://www.youtube-nocookie.com/embed/a1Y73sPHKxw?rel=0&autoplay=1&controls=0&showinfo=0&enablejsapi=1&wmode=transparent" frameborder="0"></iframe> -->
 		</div>
 
 		<div id="title">
 			<h1>TrendCouch</h1>
-			<h2><img id="music" src="/sitemedia/images/music.png"/> LMFAO - I'm sexy and I know it</h2>
+			<h2><img id="music" src="/sitemedia/images/music.png"/><div id="video-title">{{title}}</div></h2>
 		</div>
 	
 		<div id="menu">

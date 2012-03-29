@@ -4,31 +4,53 @@ var ytp; // Youtube Flash Player Object
 $(document).ready(function(){
     
 	// load video list
-	loadVideoList()
+	loadVideoList();
 	setCurrentVideoIndex(0);
 
 	// adjust viewport
-    console.log("Viewport Dimentions adjusted");
     v = viewport();
     $("div#video object").attr("width",v.width);
     $("div#video object").attr("height",v.height);
+    console.log("Viewport Dimentions adjusted");
 
 	// set pause/play button action
-    $("img#pause").click(function() {
+    $("#controls").click(function() {
 
 	state = ytp.getPlayerState();
 
+	// Setting play/pause properties
 	if (state == 1){ // Playing
 	    ytp.pauseVideo();
+	    $("#controls").css("background-image","url('/sitemedia/images/play_light.png')");
 	    console.log("Pause");
 	}
 	else if (state == 2){ // Paused
 	    ytp.playVideo();
+	    $("#controls").css("background-image","url('/sitemedia/images/pause_light.png')");	    
 	    console.log("Play");
 	}
     });
 
-	$("img#next").click(function(){
+	// Showing volume menu
+	$("#volume").click(function(){
+		$("#change-volume").toggle();
+	});
+
+	// Increasing volume
+	$("#volume-up").click(function(){
+		volume = parseInt($("div#actual-volume").text()) + 10;
+		ytp.setVolume(volume);
+		$("div#actual-volume").html(ytp.getVolume());
+	});
+	
+	// Decreasing volume
+	$("#volume-down").click(function(){
+		volume = parseInt($("div#actual-volume").text()) - 10;
+		ytp.setVolume(volume);
+		$("div#actual-volume").html(ytp.getVolume());
+	});
+
+	$("#next").click(function(){
 		var current_index = getCurrentVideoIndex()
 		current_index = current_index + 1
 		
@@ -59,14 +81,15 @@ function onYouTubePlayerReady(playerid) {
 
     // Initial video
 	video_id = $("input#video-id").val()
-	ytp.loadVideoById(video_id,1,'medium');
-    //ytp.loadVideoById('flmB63_fpm4',1,'medium');
+	//ytp.loadVideoById(video_id,1,'medium');	// Happy-not-german-free-great-sexy-songs :)
+    ytp.loadVideoById('flmB63_fpm4',1,'medium'); // Sad-german-not-blocked-song :(
 
-    console.log(ytp);
+    // Setting volume property
+    $("div#actual-volume").html(ytp.getVolume());
 
 }
 
-// get viewport for player expansion 
+// get viewport for player expansion
 function viewport() {
     var e = window , a = 'inner';
     if ( !( 'innerWidth' in window ) ) {

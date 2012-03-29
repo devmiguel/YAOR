@@ -128,5 +128,5 @@ function timerUI(){
 }
 
 function fadeUI(){
-	$("div.fader").fadeOut(3000);
+	$("div.fader").fadeOut(2000);
 }

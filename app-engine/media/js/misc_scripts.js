@@ -4,8 +4,8 @@ var moved = false;
 $(document).ready(function(){
     
 	// load video list
-//	loadVideoList();
-//	setCurrentVideoIndex(0);
+	loadVideoList();
+	setCurrentVideoIndex(0);
 
 	// adjust viewport
     v = viewport();
@@ -54,7 +54,7 @@ $(document).ready(function(){
 	});
 
 	$("#next").click(function(){
-		/*var current_index = getCurrentVideoIndex()
+		var current_index = getCurrentVideoIndex()
 		current_index = current_index + 1
 		
 		var next_song = getVideoByIndex(current_index)
@@ -70,7 +70,7 @@ $(document).ready(function(){
 		ytp.loadVideoById(next_song.link,1,'medium');
 		
 		// change song title
-		$("div#video-title").html(next_song.title)*/
+		$("div#video-title").html(next_song.title)
 		
 	});
 	
@@ -98,9 +98,9 @@ function onYouTubePlayerReady(playerid) {
     ytp = document.getElementById("ytplayer");
 
     // Initial video
-	//video_id = $("input#video-id").val()
+	video_id = $("input#video-id").val()
 	//ytp.loadVideoById(video_id,1,'medium');	// Happy-not-german-free-great-sexy-songs :)
-    //ytp.loadVideoById('flmB63_fpm4',1,'medium'); // Sad-german-not-blocked-song :(
+    ytp.loadVideoById('flmB63_fpm4',1,'medium'); // Sad-german-not-blocked-song :(
 
     // Setting volume property
     $("div#actual-volume").html(ytp.getVolume());

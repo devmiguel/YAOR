@@ -32,26 +32,45 @@ h2{
 	position: absolute;
 	right: 25px; 
 	top: 25px;
+	background-image: url('/sitemedia/images/gear_light.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 35px;
+	height: 35px;
 }
 
 #controls{
 	position: absolute;
 	left: 50%; 
-	width: 50px; 
-	margin-left: -25px;
-	bottom: 50px;
+	margin-left: -17.5px;
+	bottom: 35px;
+	background-image: url('/sitemedia/images/play_light.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 35px;
+	height: 35px;
 }
 
 #volume{
 	position: absolute;
 	left: 25px;
 	bottom: 25px;
+	background-image: url('/sitemedia/images/volume_light.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 35px;
+	height: 35px;
 }
 
 #next{
 	position: absolute;
-	bottom: 25px;
+	bottom: 65px;
 	right: 25px;
+	background-image: url('/sitemedia/images/next_light.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 35px;
+	height: 35px;
 }
 
 #video{
@@ -62,6 +81,17 @@ h2{
 	left: 0;
 }
 
-img#music {
-	  padding-right:4px;
+#music {
+	float:left;
+	padding-right: 4px;
+	background-image: url('/sitemedia/images/music.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 18px;
+	height: 18px;
+}
+
+#video-title{
+	padding-left: 10px;
+	float:left;
 }

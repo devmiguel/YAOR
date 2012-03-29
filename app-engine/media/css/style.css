@@ -53,7 +53,7 @@ h2{
 
 #volume{
 	position: absolute;
-	left: 25px;
+	left: 45%;
 	bottom: 25px;
 	background-image: url('/sitemedia/images/volume_light.png');
 	background-repeat: no-repeat;
@@ -64,11 +64,11 @@ h2{
 
 #change-volume{
 	position: absolute;
-	left: 75px;
+	left: 35%;
 	bottom: 16px;
-	width: 200px;
+	width: auto;
 	height: 50px;
-	visibility:hidden;
+	visibility: hidden;
 }
 
 #volume-up{
@@ -103,8 +103,8 @@ h2{
 
 #next{
 	position: absolute;
-	bottom: 65px;
-	right: 25px;
+	bottom: 25px;
+	right: 45%;
 	background-image: url('/sitemedia/images/next_light.png');
 	background-repeat: no-repeat;
 	background-position: center center;

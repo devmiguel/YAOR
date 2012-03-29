@@ -1,11 +1,11 @@
 var ytp; // Youtube Flash Player Object
-
+var moved = false;
 
 $(document).ready(function(){
     
 	// load video list
-	loadVideoList();
-	setCurrentVideoIndex(0);
+//	loadVideoList();
+//	setCurrentVideoIndex(0);
 
 	// adjust viewport
     v = viewport();
@@ -33,7 +33,10 @@ $(document).ready(function(){
 
 	// Showing volume menu
 	$("#volume").click(function(){
-		$("#change-volume").toggle();
+		if ( $("#change-volume").css("visibility") == "hidden" )
+			$("#change-volume").css("visibility", "visible");
+		else
+			$("#change-volume").css("visibility", "hidden")
 	});
 
 	// Increasing volume
@@ -51,7 +54,7 @@ $(document).ready(function(){
 	});
 
 	$("#next").click(function(){
-		var current_index = getCurrentVideoIndex()
+		/*var current_index = getCurrentVideoIndex()
 		current_index = current_index + 1
 		
 		var next_song = getVideoByIndex(current_index)
@@ -67,10 +70,25 @@ $(document).ready(function(){
 		ytp.loadVideoById(next_song.link,1,'medium');
 		
 		// change song title
-		$("div#video-title").html(next_song.title)
+		$("div#video-title").html(next_song.title)*/
 		
 	});
-
+	
+	$("body").mousemove(function() {
+		moved = true;
+		if ( $("div.fader").css("display") == "none" )
+			$.when( $("div.fader").fadeIn(600) ).then( timerUI() );
+		else {
+			console.log("stop")
+			//$.when( $("div.fader").stop(true,true).fadeIn(100) ).then( timerUI() );
+			$.when( $("div.fader").stop(true).css("opacity",1).css("display","inline") ).then( timerUI() );
+		}
+	});
+	
+	timerUI();
+	
+	move = false;
+	
 });
 
 // Starts the video set in 'video-id' hidden input 
@@ -80,9 +98,9 @@ function onYouTubePlayerReady(playerid) {
     ytp = document.getElementById("ytplayer");
 
     // Initial video
-	video_id = $("input#video-id").val()
+	//video_id = $("input#video-id").val()
 	//ytp.loadVideoById(video_id,1,'medium');	// Happy-not-german-free-great-sexy-songs :)
-    ytp.loadVideoById('flmB63_fpm4',1,'medium'); // Sad-german-not-blocked-song :(
+    //ytp.loadVideoById('flmB63_fpm4',1,'medium'); // Sad-german-not-blocked-song :(
 
     // Setting volume property
     $("div#actual-volume").html(ytp.getVolume());
@@ -97,4 +115,18 @@ function viewport() {
 	e = document.documentElement || document.body;
     }
     return { width : e[ a+'Width' ] , height : e[ a+'Height' ] }
+}
+
+// Timer for the UI to start fading out
+function timerUI(){
+	setTimeout(function(){
+		if ( moved == false ) {
+			fadeUI();
+		}
+		moved = false;
+	}, 4000);
+}
+
+function fadeUI(){
+	$("div.fader").fadeOut(3000);
 }

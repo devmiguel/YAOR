@@ -15,9 +15,9 @@
 	        <div id="video">
 <!-- Trending			<iframe width="600" height="400" src="http://www.youtube-nocookie.com/embed/{{video_link}}?rel=0&autoplay=1&fs=1&controls=0&showinfo=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe> -->
 
-<object type="application/x-shockwave-flash" id="ytplayer" wmode="transparent" data="http://www.youtube.com/apiplayer?enablejsapi=1&rel=0&autoplay=1" width="600" height="400">
+<!--<object type="application/x-shockwave-flash" id="ytplayer" wmode="transparent" data="http://www.youtube.com/apiplayer?enablejsapi=1&rel=0&autoplay=1" width="600" height="400">
   <param name="allowScriptAccess" value="always">
-</object>
+</object>-->
 
 <input id="video-id" type="hidden" name="video-id-input" value="{{video_link}}">
 <input id="video-list" type="hidden" name="video-list-input" value="{{video_list}}">
@@ -25,7 +25,7 @@
 <!-- Chipmunk                <iframe width="600" height="400" src="http://www.youtube-nocookie.com/embed/a1Y73sPHKxw?rel=0&autoplay=1&controls=0&showinfo=0&enablejsapi=1&wmode=transparent" frameborder="0"></iframe> -->
 		</div>
 
-		<div id="title">
+		<div id="title" class="fader">
 			<h1>TrendCouch</h1>
 			<h2>
 				<div id="subtitle">
@@ -35,19 +35,19 @@
 			</h2>
 		</div>
 	
-		<div id="gear"></div>
+		<div id="gear" class="fader"></div>
 	
-		<div id="volume"></div>
+		<div id="volume" class="fader"></div>
 		
-		<div id="change-volume">
+		<div id="change-volume" class="fader">
 			<div id="volume-down"></div>
 			<div id="actual-volume"></div>
 			<div id="volume-up"></div>
 		</div>
 	
-		<div id="controls"></div>
+		<div id="controls" class="fader"></div>
 		
-		<div id="next"></div>
+		<div id="next" class="fader"></div>
 
 	</div>
 	

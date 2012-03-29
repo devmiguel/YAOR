@@ -31,7 +31,7 @@ h2{
 #gear{
 	position: absolute;
 	right: 25px; 
-	top: 25px;
+	top: 15px;
 	background-image: url('/sitemedia/images/gear_light.png');
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -43,7 +43,7 @@ h2{
 	position: absolute;
 	left: 50%; 
 	margin-left: -17.5px;
-	bottom: 35px;
+	bottom: 25px;
 	background-image: url('/sitemedia/images/pause_light.png');
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -65,10 +65,10 @@ h2{
 #change-volume{
 	position: absolute;
 	left: 75px;
-	bottom: 18px;
+	bottom: 16px;
 	width: 200px;
 	height: 50px;
-	display: none;
+	visibility:hidden;
 }
 
 #volume-up{

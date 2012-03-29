@@ -1,5 +1,6 @@
 var ytp; // Youtube Flash Player Object
-var moved = false;
+var moved = false; // True if the mouse has been moved
+var bb = false; // True when the mouse is over any button/div
 
 $(document).ready(function(){
     
@@ -16,19 +17,19 @@ $(document).ready(function(){
 	// set pause/play button action
     $("#controls").click(function() {
 
-	state = ytp.getPlayerState();
+		state = ytp.getPlayerState();
 
-	// Setting play/pause properties
-	if (state == 1){ // Playing
-	    ytp.pauseVideo();
-	    $("#controls").css("background-image","url('/sitemedia/images/play_light.png')");
-	    console.log("Pause");
-	}
-	else if (state == 2){ // Paused
-	    ytp.playVideo();
-	    $("#controls").css("background-image","url('/sitemedia/images/pause_light.png')");	    
-	    console.log("Play");
-	}
+		// Setting play/pause properties
+		if (state == 1){ // Playing
+			ytp.pauseVideo();
+			$("#controls").css("background-image","url('/sitemedia/images/play_light.png')");
+			console.log("Pause");
+		}
+		else if (state == 2){ // Paused
+			ytp.playVideo();
+			$("#controls").css("background-image","url('/sitemedia/images/pause_light.png')");	    
+			console.log("Play");
+		}
     });
 
 	// Showing volume menu
@@ -71,7 +72,9 @@ $(document).ready(function(){
 		
 		// change song title
 		$("div#video-title").html(next_song.title)
-		
+
+		// setting the pause button
+		$("#controls").css("background-image","url('/sitemedia/images/pause_light.png')");
 	});
 	
 	$("body").mousemove(function() {
@@ -79,14 +82,17 @@ $(document).ready(function(){
 		if ( $("div.fader").css("display") == "none" )
 			$.when( $("div.fader").fadeIn(600) ).then( timerUI() );
 		else {
-			console.log("stop")
-			//$.when( $("div.fader").stop(true,true).fadeIn(100) ).then( timerUI() );
 			$.when( $("div.fader").stop(true).css("opacity",1).css("display","inline") ).then( timerUI() );
 		}
 	});
 	
+	// Determining if the mouse is over any button/div
+	$("div#title, div#gear, div#volume, div#change-volume, div#title, div#controls, div#next").hover(
+	  function () { bb = true; }, 
+	  function () { bb = false; }
+	);
+
 	timerUI();
-	
 	move = false;
 	
 });
@@ -120,13 +126,16 @@ function viewport() {
 // Timer for the UI to start fading out
 function timerUI(){
 	setTimeout(function(){
-		if ( moved == false ) {
+		if ( moved == false && !bb ) {
 			fadeUI();
 		}
 		moved = false;
-	}, 4000);
+	}, 1500);
 }
 
 function fadeUI(){
-	$("div.fader").fadeOut(2000);
+
+	$("div.fader").fadeOut(3000,function(){
+		$("div#change-volume").css("visibility","hidden");
+	});
 }

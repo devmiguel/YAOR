@@ -29,16 +29,13 @@ $(document).ready(function(){
     });
 
 	$("img#next").click(function(){
-		alert("CLiCK")
 		var current_index = getCurrentVideoIndex()
 		current_index = current_index + 1
 		
-		alert(current_index)
 		var next_song = getVideoByIndex(current_index)
 		if(next_song == null){
 			next_song = getVideoByIndex(0)
 			current_index = 0
-			alert("not found")
 		}
 		
 		// set current index
@@ -49,8 +46,6 @@ $(document).ready(function(){
 		
 		// change song title
 		$("div#video-title").html(next_song.title)
-		
-		alert("current: "+current_index+" "+next_song.title)
 		
 	});
 

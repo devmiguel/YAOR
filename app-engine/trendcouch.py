@@ -54,7 +54,6 @@ class SearchYoutube():
 		#if search_term:
 		#	query.vq = search_term
 		query.max_results = '10'
-		query.orderby = 'viewCount'
 		query.category = 'Music'
 		query.restriction = str(request.remote_addr)
 		query.safeSearch = "strict"

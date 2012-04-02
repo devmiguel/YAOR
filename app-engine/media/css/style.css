@@ -1,3 +1,7 @@
+body{
+	background: black;
+}
+
 h1{
 	margin: 0;
 	font-size: 30px;
@@ -37,17 +41,39 @@ h2{
 	width: 35px;
 	height: 35px;
 }
+#gear:hover{
+	background-image: url('/sitemedia/images/gear_active.png');
+}
 
 #controls{
 	position: absolute;
 	left: 50%; 
 	margin-left: -17.5px;
 	bottom: 25px;
+	width: 35px;
+	height: 35px;
+}
+#pause{
+	display:block;
 	background-image: url('/sitemedia/images/pause.png');
 	background-repeat: no-repeat;
 	background-position: center center;
 	width: 35px;
 	height: 35px;
+}
+#play{
+	display:none;
+	background-image: url('/sitemedia/images/play.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 35px;
+	height: 35px;
+}
+#pause:hover{
+	background-image: url('/sitemedia/images/pause_active.png');
+}
+#play:hover{
+	background-image: url('/sitemedia/images/play_active.png');
 }
 
 #volume{
@@ -60,12 +86,15 @@ h2{
 	width: 35px;
 	height: 35px;
 }
+#volume:hover{
+	background-image: url('/sitemedia/images/volume_active.png');
+}
 
 #change-volume{
 	position: absolute;
-	left: 35%;
+	left: 33%;
 	bottom: 16px;
-	width: auto;
+	width: 200px;
 	height: 50px;
 	visibility: hidden;
 }
@@ -95,9 +124,11 @@ h2{
 #actual-volume{
 	float: left;
 	margin-top: 12px;
+	width:24px;
 	padding: 0 10px;
 	font-size: 20px;
 	color: #b9b9b9;
+	text-align:center;
 }
 
 #next{
@@ -109,6 +140,9 @@ h2{
 	background-position: center center;
 	width: 35px;
 	height: 35px;
+}
+#next:hover{
+	background-image: url('/sitemedia/images/next_active.png');
 }
 
 #feedback{
@@ -249,4 +283,12 @@ input#search{
 div#search{
 	padding-top: 15px;
 	clear: both;
+}
+
+#playpause img{
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-22px;
+	margin-left:-22px;
 }

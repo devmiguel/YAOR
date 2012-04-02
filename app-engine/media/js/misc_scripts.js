@@ -39,26 +39,35 @@ $(document).ready(function(){
 		updateInput();
 	});
 
-	// set pause/play button action
+	// Pause/play
     $("#controls").click(function() {
-
-		state = ytp.getPlayerState();
-
-		// Setting play/pause properties
-		if (state == 1){ // Playing
-			ytp.pauseVideo();
-			$("#controls").css("background-image","url('/sitemedia/images/play.png')");
-			console.log("[Player] Pause");
-		}
-		else if (state == 2){ // Paused
-			ytp.playVideo();
-			$("#controls").css("background-image","url('/sitemedia/images/pause.png')");	    
-			console.log("[Player] Play");
-		}
+		togglePlay();
     });
+
+	// Keyboard shortcuts
+	$(document).keypress(function(e){
+		// 32 = space
+		if ((e.which && e.which == 32) || (e.keyCode && e.keyCode == 32))
+			togglePlay();
+		// 110 = n & 78 = N
+		if ((e.which && e.which == 110) || (e.keyCode && e.keyCode == 110) || (e.which && e.which == 78) || (e.which && e.which == 78))
+			nextVideo();
+		// 43 = +
+		if ((e.which && e.which == 43) || (e.keyCode && e.keyCode == 43))
+			volumeUp();
+		// 45 = -
+		if ((e.which && e.which == 45) || (e.keyCode && e.keyCode == 45))
+			volumeDown();
+	});
+	
+	// Next video
+	$("#next").click(function(){
+		nextVideo();
+	});
 
 	// Showing volume menu
 	$("#volume").click(function(){
+		console.log('hola');
 		if ( $("#change-volume").css("visibility") == "hidden" )
 			$("#change-volume").css("visibility", "visible");
 		else
@@ -67,39 +76,12 @@ $(document).ready(function(){
 
 	// Increasing volume
 	$("#volume-up").click(function(){
-		volume = parseInt($("div#actual-volume").text()) + 10;
-		ytp.setVolume(volume);
-		$("div#actual-volume").html(ytp.getVolume());
+		volumeUp();
 	});
 	
 	// Decreasing volume
 	$("#volume-down").click(function(){
-		volume = parseInt($("div#actual-volume").text()) - 10;
-		ytp.setVolume(volume);
-		$("div#actual-volume").html(ytp.getVolume());
-	});
-
-	$("#next").click(function(){
-		var current_index = getCurrentVideoIndex()
-		current_index = current_index + 1
-		
-		var next_song = getVideoByIndex(current_index)
-		if(next_song == null){
-			next_song = getVideoByIndex(0)
-			current_index = 0
-		}
-		
-		// set current index
-		localStorage["video-index"] = current_index
-		
-		// load song in player
-		ytp.loadVideoById(next_song.link,1,'medium');
-		
-		// change song title
-		$("div#video-title").html(next_song.title)
-
-		// setting the pause button
-		$("#controls").css("background-image","url('/sitemedia/images/pause.png')");
+		volumeDown();
 	});
 	
 	$("body").mousemove(function(event) {
@@ -222,7 +204,73 @@ function updateInput(){
 	else if ( $("input#search").val() == "" ){
 		$("input#search").val("Search video...");
 	}
+}
+
+// Play/Pause Animations
+
+function togglePlay(){
+
+	var $elem = $('#playpause').children(':first');
+	console.log('here');
+	$elem.stop()
+	.show()
+	.animate({'marginTop':'-35px','marginLeft':'-35px','width':'70px','height':'70px','opacity':'0'},function(){
+	$(this).css({'width':'45px','height':'45px','margin-left':'-22px','margin-top':'-22px','opacity':'1','display':'none'});
+	});
+	$elem.parent().append($elem);
+	
+	state = ytp.getPlayerState();
+
+	// Setting play/pause properties
+	if (state == 1){ // Playing
+		ytp.pauseVideo();
+		$("#controls #play").css("display","block");
+		$("#controls #pause").css("display","none");
+		console.log("[Player] Pause");
+	}
+	else if (state == 2){ // Paused
+		ytp.playVideo();
+		$("#controls #pause").css("display","block");
+		$("#controls #play").css("display","none");    
+		console.log("[Player] Play");
+	}
+
+}
+
+function nextVideo(){
+
+	var current_index = getCurrentVideoIndex()
+	current_index = current_index + 1
+	
+	var next_song = getVideoByIndex(current_index)
+	if(next_song == null){
+		next_song = getVideoByIndex(0)
+		current_index = 0
+	}
+	
+	// set current index
+	localStorage["video-index"] = current_index
+	
+	// load song in player
+	ytp.loadVideoById(next_song.link,1,'medium');
+	
+	// change song title
+	$("div#video-title").html(next_song.title)
+
+	// setting the pause button
+	$("#controls #pause").css("display","block");
+	$("#controls #play").css("display","none");   
 	
 }
 
+function volumeUp(){
+	volume = parseInt($("div#actual-volume").text()) + 10;
+	ytp.setVolume(volume);
+	$("div#actual-volume").html(ytp.getVolume());
+}
 
+function volumeDown(){
+	volume = parseInt($("div#actual-volume").text()) - 10;
+	ytp.setVolume(volume);
+	$("div#actual-volume").html(ytp.getVolume());
+}

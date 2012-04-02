@@ -24,6 +24,8 @@ handlers:
 
 - url: /
   script: trendcouch.py
+- url: /search
+  script: trendcouch.py
   
 
 builtins:

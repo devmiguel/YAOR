@@ -93,7 +93,7 @@ $(document).ready(function(){
 		localStorage["video-index"] = current_index
 		
 		// load song in player
-		ytp.loadVideoById(next_song.link,1,'medium');
+		ytp.loadVideoById(next_song.link,1,'default');
 		
 		// change song title
 		$("div#video-title").html(next_song.title)
@@ -139,8 +139,8 @@ function onYouTubePlayerReady(playerid) {
 
     // Initial video
 	video_id = $("input#video-id").val()
-	//ytp.loadVideoById(video_id,1,'medium');	// Happy-not-german-free-great-sexy-songs :)
-    ytp.loadVideoById('flmB63_fpm4',1,'medium'); // Sad-german-not-blocked-song :(
+	ytp.loadVideoById(video_id,1,'default');	// Happy-not-german-free-great-sexy-songs :)
+    //ytp.loadVideoById('flmB63_fpm4',1,'medium'); // Sad-german-not-blocked-song :(
 
     // Setting volume property
     $("div#actual-volume").html(ytp.getVolume());

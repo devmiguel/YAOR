@@ -36,6 +36,13 @@ class CentralPage(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'trendcouch.html')
 		self.response.out.write(template.render(path, template_values))				
 
+class SearchTestPage(webapp.RequestHandler):
+	def get(self):
+		sy = SearchYoutube()
+		template_values = sy.getVideos(self.request, self.response)
+		
+		path = os.path.join(os.path.dirname(__file__), 'trendcouch.html')
+		self.response.out.write(json.dumps(template_values))
 		
 class SearchYoutube():	
 	def getVideos(self,request,response):
@@ -54,7 +61,9 @@ class SearchYoutube():
 		#if search_term:
 		#	query.vq = search_term
 		query.max_results = '10'
+		query.start_index = random.randint(1,150)
 		query.category = 'Music'
+		query.orderby = 'viewCount'
 		query.restriction = str(request.remote_addr)
 		query.safeSearch = "strict"
 		query.racy = 'exclude'
@@ -72,6 +81,8 @@ class SearchYoutube():
 			if len(e.media.thumbnail) >2:
 				thumbnail = e.media.thumbnail[2].url
 			video_list.append({"title":e.title.text,"link":e.id.text.split('/').pop(), "thumbnail": thumbnail, "query": request.remote_addr})
+			#video_list.append({"title":e.title.text})
+			
 		
 		random.shuffle(video_list) #shuffling video list
 		r = random.randint(0,9) #TODO results could be LESS
@@ -94,8 +105,8 @@ class SearchYoutube():
 		#self.response.out.write(json.dumps(video_dic))		
 
 application = webapp.WSGIApplication(
-                                 	[('/',CentralPage)
-									 #('/search', SearchYoutube)
+                                 	[('/',CentralPage),
+									 ('/search', SearchTestPage)
 									],
                                      debug=True)
 

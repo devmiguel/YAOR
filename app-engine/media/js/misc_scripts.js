@@ -78,6 +78,7 @@ $(document).ready(function(){
 		ytp.setVolume(volume);
 		$("div#actual-volume").html(ytp.getVolume());
 	});
+	
 
 	$("#next").click(function(){
 		var current_index = getCurrentVideoIndex()

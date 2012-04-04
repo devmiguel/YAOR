@@ -211,7 +211,8 @@ $(document).ready(function(){
 		$("div#video-title").html(next_song.title)
 
 		// setting the pause button
-		$("#controls").css("background-image","url('/sitemedia/images/pause.png')");
+		$("#controls #play").css("display","none");
+		$("#controls #pause").css("display","block");
 
 		volumeDown();
 
@@ -222,10 +223,11 @@ $(document).ready(function(){
 		// If the popup menu is enabled, we dont care about the mouse movements
 		if ( popupStatus == 0 ) {
 			moved = true;
-			if ( $("div.fader").css("display") == "none" )
+			if ( $("div.fader").css("display") == "none" ) {
 				$.when( $("div.fader").fadeIn(600) ).then( timerUI() );
+			}
 			else {
-				$.when( $("div.fader").stop(true).css("opacity",1).css("display","inline") ).then( timerUI() );
+				$.when( $("div.fader, div.semifader").stop(true).css("opacity",1).css("display","inline") ).then( timerUI() );
 			}
 		}
 		else{
@@ -317,6 +319,7 @@ function fadeUI(){
 	$("div.fader").fadeOut(3000,function(){
 		$("div#change-volume").css("visibility","hidden");
 	});
+	$("div.semifader").fadeTo(3000, 0.5);
 
 }
 
@@ -374,15 +377,6 @@ function updateInput(){
 // Play/Pause Animations
 
 function togglePlay(){
-
-	var $elem = $('#playpause').children(':first');
-	console.log('here');
-	$elem.stop()
-	.show()
-	.animate({'marginTop':'-35px','marginLeft':'-35px','width':'70px','height':'70px','opacity':'0'},function(){
-	$(this).css({'width':'45px','height':'45px','margin-left':'-22px','margin-top':'-22px','opacity':'1','display':'none'});
-	});
-	$elem.parent().append($elem);
 	
 	state = ytp.getPlayerState();
 
@@ -398,6 +392,17 @@ function togglePlay(){
 		$("#controls #pause").css("display","block");
 		$("#controls #play").css("display","none");    
 		console.log("[Player] Play");
+	}
+	
+	if (state == 1 || state == 2) {
+		var $elem = $('#playpause').children(':first');
+		console.log('here');
+		$elem.stop()
+		.show()
+		.animate({'marginTop':'-35px','marginLeft':'-35px','width':'70px','height':'70px','opacity':'0'},function(){
+		$(this).css({'width':'45px','height':'45px','margin-left':'-22px','margin-top':'-22px','opacity':'1','display':'none'});
+		});
+		$elem.parent().append($elem);
 	}
 
 }

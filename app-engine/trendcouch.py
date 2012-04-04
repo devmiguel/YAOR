@@ -61,7 +61,7 @@ class SearchYoutube():
 		#if search_term:
 		#	query.vq = search_term
 		query.max_results = '10'
-		query.start_index = random.randint(1,30)
+		query.start_index = random.randint(1,50)
 		query.category = 'Music'
 		query.orderby = 'viewCount'
 		query.restriction = str(request.remote_addr)

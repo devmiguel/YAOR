@@ -12,24 +12,36 @@
 
 	<div id="main">
 	
+	<div id="video-clicker">
+	
+	</div>
+	
 	        <div id="video">
 <!-- Trending			<iframe width="600" height="400" src="http://www.youtube-nocookie.com/embed/{{video_link}}?rel=0&autoplay=1&fs=1&controls=0&showinfo=0&enablejsapi=1" frameborder="0" allowfullscreen></iframe> -->
 
+<!--
 <object type="application/x-shockwave-flash" id="ytplayer" wmode="transparent" data="http://www.youtube.com/apiplayer?enablejsapi=1&rel=0&autoplay=1" width="600" height="400">
   <param name="allowScriptAccess" value="always">
 </object>
+
+-->
+
+<div id="ytapiplayer"></div>
 
 <input id="video-id" type="hidden" name="video-id-input" value="{{video_link}}">
 <input id="video-list" type="hidden" name="video-list-input" value="{{video_list}}">
 
 <!-- Chipmunk                <iframe width="600" height="400" src="http://www.youtube-nocookie.com/embed/a1Y73sPHKxw?rel=0&autoplay=1&controls=0&showinfo=0&enablejsapi=1&wmode=transparent" frameborder="0"></iframe> -->
 		</div>
+		
 
-		<div id="title" class="fader">
+		<div id="title">
 			<h1>TrendCouch</h1>
 			<h2>
 				<div id="subtitle">
+					<!--
 					<div id="music"></div>
+				-->
 					<div id="video-title">{{title}}</div>
 				</div>
 			</h2>
@@ -40,6 +52,9 @@
 		<div id="playpause">
 			<img src="/sitemedia/images/pause.png" width="45" height="45" style="display:none;"/>
 			<img src="/sitemedia/images/play.png" width="45" height="45" style="display:none;"/>
+		</div>
+		<div id="video-load" class="fader">
+			
 		</div>
 	
 		<div id="popupContact">

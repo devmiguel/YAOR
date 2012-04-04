@@ -1,10 +1,25 @@
-var ytp; // Youtube Flash Player Object
+var ytp = null; // Youtube Flash Player Object
 var moved = false; // True if the mouse has been moved
 var bb = false; // True when the mouse is over any button/div
 var popupStatus = 0;  // 0 means disabled; 1 means enabled;  
+var c = 0;
+var bufferCount = 0;
+var bufferReloads = 0;
+
+function loadSWFPlayer(){
+	
+	var params = { allowScriptAccess: "always", bgcolor: "#cccccc"};
+    // this sets the id of the object or embed tag to 'myytplayer'.
+    // You then use this id to access the swf and make calls to the player's API
+    var atts = { id: "ytplayer", wmode: "transparent" };
+    swfobject.embedSWF("http://www.youtube.com/apiplayer?enablejsapi=1&playerapiid=ytplayer", 
+                       "ytapiplayer", "510", "290", "8", null, null, params, atts);	
+}
 
 $(document).ready(function(){
-       
+
+    loadSWFPlayer();
+
 	// load video list
 	loadVideoList();
 	setCurrentVideoIndex(0);
@@ -14,6 +29,91 @@ $(document).ready(function(){
 		centerPopup();
 		loadPopup();
 	});
+	
+	// updating video load
+	var video_load = $("div#video-load");
+	function updateVideoLoad(){
+		setTimeout(function(){
+			if(c) {
+		      clearTimeout(c);
+		      c = 0;
+		   }
+			//alert(getBytesLoaded());
+			c = setTimeout(updateVideoLoad(), 1000);
+			
+			if(ytp==null){
+				video_load.html("player not ready");
+				return;
+			}
+			
+			var player_state = getPlayerState();
+			
+			if(player_state == 0){
+				nextVideo();
+				return;
+			}
+			
+			if(player_state == 3){
+
+				var percentage = 0;
+
+				var bytes_loaded = getBytesLoaded();
+				var bytes_total = getBytesTotal();
+				if(bytes_loaded == -1){
+					percentage = 0;
+				} else if(Math.round(bytes_loaded)==0){
+					percentage = 0;
+				}else if(Math.round((bytes_loaded/bytes_total)*100) == NaN){
+					percentage = 0;
+				}
+				else{
+					percentage = Math.round((bytes_loaded/bytes_total)*100);
+				}
+				
+				video_load.html(percentage+"% buffering video");
+				
+				
+				if(bufferCount > 15){
+					if(percentage == 0){ //just reload if video not loading
+						loadCurrentVideo();
+						bufferCount=0;
+						//reloading video
+						bufferReloads+=1;
+						console.log("Reloading video");
+						return;
+					}
+				}
+				
+				if(bufferReloads > 0){
+					//reloading video
+					bufferReloads=0;
+					bufferCount =0;
+					nextVideo();
+					console.log("Reloading exceeded. Loading next video");
+					return;
+				}
+				
+				
+				bufferCount+=1;
+				return;
+			}
+			
+			var bytes_loaded = getBytesLoaded();
+			var bytes_total = getBytesTotal();
+			if(bytes_loaded == -1){
+				video_load.html("video starting");
+			} else if(Math.round(bytes_loaded)==0){
+				video_load.html("video starting");
+			}else if(Math.round((bytes_loaded/bytes_total)*100) == NaN){
+				video_load.html("loading video");
+			}
+			else{
+				video_load.html(Math.round((bytes_loaded/bytes_total)*100)+"% loaded");
+			}
+				
+		}, 1000);
+	}
+	updateVideoLoad();
 	
 	// Closing popup menu
 	$("#popupContactClose").click(function(){ disablePopup(); });
@@ -45,7 +145,7 @@ $(document).ready(function(){
     });
 
 	//Pause/ play on player click
-	$("#ytplayer").click(function(){
+	$("div#video-clicker").click(function(){
 		togglePlay();
 	});
 
@@ -90,7 +190,6 @@ $(document).ready(function(){
 		ytp.setVolume(volume);
 		$("div#actual-volume").html(ytp.getVolume());
 	});
-	
 
 	$("#next").click(function(){
 		var current_index = getCurrentVideoIndex()
@@ -154,13 +253,39 @@ function onYouTubePlayerReady(playerid) {
     ytp = document.getElementById("ytplayer");
 
     // Initial video
-	video_id = $("input#video-id").val()
-	ytp.loadVideoById(video_id,1,'default');	// Happy-not-german-free-great-sexy-songs :)
+	video_id = $("input#video-id").val();
+	setTimeout(ytp.loadVideoById(video_id,1,'default'),1000);	// Happy-not-german-free-great-sexy-songs :)
     //ytp.loadVideoById('flmB63_fpm4',1,'medium'); // Sad-german-not-blocked-song :(
 
     // Setting volume property
     $("div#actual-volume").html(ytp.getVolume());
+}
 
+function loadCurrentVideo(){
+	
+	var bufferCount = 0;
+	var bufferReloads = 0;
+	
+	video_id = $("input#video-id").val();
+	setTimeout(ytp.loadVideoById(video_id,1,'default'),1000);
+}
+
+function getBytesLoaded() {
+  if (ytp) {
+    return ytp.getVideoBytesLoaded();
+  }
+}
+
+function getBytesTotal() {
+  if (ytp) {
+    return ytp.getVideoBytesTotal();
+  }
+}
+
+function getPlayerState() {
+  if (ytp) {
+    return ytp.getPlayerState();
+  }
 }
 
 // get viewport for player expansion
@@ -184,10 +309,15 @@ function timerUI(){
 }
 
 function fadeUI(){
+	var playerState= getPlayerState();
+	if(playerState == 2 || playerState == -1 || playerState == 3){
+		return; //return on pause state or unstarted state or buffering
+	}
 
 	$("div.fader").fadeOut(3000,function(){
 		$("div#change-volume").css("visibility","hidden");
 	});
+
 }
 
 // Loading popup menu
@@ -274,6 +404,9 @@ function togglePlay(){
 
 function nextVideo(){
 
+	bufferCount = 0;
+	bufferReloads = 0;
+
 	var current_index = getCurrentVideoIndex()
 	current_index = current_index + 1
 	
@@ -288,6 +421,7 @@ function nextVideo(){
 	
 	// load song in player
 	ytp.loadVideoById(next_song.link,1,'default');
+	$("input#video-id").val("'"+next_song.link+"'");
 	
 	// change song title
 	$("div#video-title").html(next_song.title)

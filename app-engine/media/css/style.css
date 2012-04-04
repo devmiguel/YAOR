@@ -1,17 +1,72 @@
 body{
 	background: black;
+	font-family: 'Overlock',Helvetica;
+	font-style:normal;
 }
 
 h1{
 	margin: 0;
 	font-size: 30px;
+	font-size:bold;
 }
 
 h2{
 	margin: 0;
-	padding-top: 10px;
-	padding-left: 10px;
-	font-size: 18px;	
+	padding-top: 4px;
+	font-size: 18px;
+	margin-left:-8px;	
+}
+
+@font-face {
+  font-family: 'Overlock';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Overlock-Black'), url('/sitemedia/fonts/overlock-font-normal.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overlock';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Overlock'), local('Overlock-Regular'), url('/sitemedia/fonts/overlock-font-bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Magra';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Magra'), url('http://themes.googleusercontent.com/static/fonts/magra/v1/5mmKlSloEdHMhJ2GHKCr6KCWcynf_cDxXwCLxiixG1c.woff') format('woff');
+}
+@font-face {
+  font-family: 'Nobile';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Nobile'), url('http://themes.googleusercontent.com/static/fonts/nobile/v3/BdG5WJmB9CCPn6im5Y8A5OvvDin1pK8aKteLpeZ5c0A.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overlock';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Overlock-Bold'), url('http://themes.googleusercontent.com/static/fonts/overlock/v2/EcjpF2hW5gSZ4M16YLdG87rIa-7acMAeDBVuclsi6Gc.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Nobile';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Nobile-bold'), local('Nobile'), url('http://themes.googleusercontent.com/static/fonts/nobile/v3/W-bwIcGmtt6wHyJeSNFUX7O3LdcAZYWl9Si6vvxL-qU.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Righteous';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Righteous'), local('Righteous-Regular'), url('http://themes.googleusercontent.com/static/fonts/righteous/v2/w5P-SI7QJQSDqB3GziL8XbO3LdcAZYWl9Si6vvxL-qU.woff') format('woff');
+}
+@font-face {
+  font-family: 'Oxygen';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oxygen'), url('http://themes.googleusercontent.com/static/fonts/oxygen/v1/eAWT4YudG0otf3rlsJD6zOvvDin1pK8aKteLpeZ5c0A.woff') format('woff');
 }
 
 #title{
@@ -19,7 +74,6 @@ h2{
 	margin: 0;
 	top: 2%;
 	left:2.5%;
-	font-style: italic;
 	color: #bbb;
 }
 
@@ -203,7 +257,7 @@ h2{
 #music {
 	float:left;
 	padding-right: 4px;
-	background-image: url('/sitemedia/images/music.png');
+	/*background-image: url('/sitemedia/images/music.png');*/
 	background-repeat: no-repeat;
 	background-position: center center;
 	width: 18px;
@@ -266,7 +320,6 @@ h2{
 
 input#search{
 	color: #b9b9b9;
-	font-style: italic;
 	-moz-border-radius: 20px;
     -webkit-border-radius: 20px;
     -khtml-border-radius: 20px;
@@ -291,4 +344,27 @@ div#search{
 	left:50%;
 	margin-top:-22px;
 	margin-left:-22px;
+}
+
+div#video-load{
+	position: absolute;
+	left: 44.5%; 
+	margin-left: 0px;
+	bottom: 25px;
+	width: 140px;
+	height: 35px;
+	top:97%;
+	color: #bbb;
+	font-size: 12px;
+	text-align : center;
+}
+
+div#video-clicker{
+	position:absolute;
+	left:30%;
+	top:20%;
+	width:45%;
+	height:60%;
+	background-color : none;
+	z-index: 90;
 }
